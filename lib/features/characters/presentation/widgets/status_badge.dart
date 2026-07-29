@@ -44,7 +44,7 @@ class StatusBadge extends StatelessWidget {
           Container(
             width: 6.w,
             height: 6.w,
-            decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+            decoration: const BoxDecoration(color: AppColors.onBrand, shape: BoxShape.circle),
           ),
           SizedBox(width: 6.w),
           Text(
@@ -52,7 +52,7 @@ class StatusBadge extends StatelessWidget {
             style: TextStyle(
               fontSize: dense ? 10.sp : 12.sp,
               fontWeight: FontWeight.w700,
-              color: Colors.white,
+              color: AppColors.onBrand,
             ),
           ),
         ],

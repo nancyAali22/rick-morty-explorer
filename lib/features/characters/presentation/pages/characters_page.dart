@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:open_file/open_file.dart';
 import '../../../../core/di/injection_container.dart';
 import '../../../../core/router/route_names.dart';
+import '../../../../core/theme/widgets/theme_toggle_button.dart';
 import '../../../export/presentation/cubit/export_cubit.dart';
 import '../../../export/presentation/cubit/export_state.dart';
 import '../cubit/characters_cubit.dart';
@@ -135,7 +136,10 @@ class _CharactersViewState extends State<_CharactersView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Characters')),
+      appBar: AppBar(
+        title: const Text('Characters'),
+        actions: const [ThemeToggleButton()],
+      ),
       floatingActionButton: BlocBuilder<ExportCubit, ExportState>(
         builder: (context, exportState) {
           final bool isExporting = exportState.status == ExportStatus.exporting;
@@ -143,10 +147,10 @@ class _CharactersViewState extends State<_CharactersView> {
             onPressed: isExporting ? null : _handleExport,
             icon: isExporting
                 ? SizedBox(
-                    width: 18.w,
-                    height: 18.w,
-                    child: const CircularProgressIndicator(strokeWidth: 2),
-                  )
+              width: 18.w,
+              height: 18.w,
+              child: const CircularProgressIndicator(strokeWidth: 2),
+            )
                 : const Icon(Icons.ios_share_rounded),
             label: Text(isExporting ? 'Exporting…' : 'Export'),
           );

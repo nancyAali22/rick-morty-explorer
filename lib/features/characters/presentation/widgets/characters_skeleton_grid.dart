@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
+import '../../../../core/theme/app_colors.dart';
 
 /// Shimmer placeholders shaped exactly like [CharacterCard], shown while
 /// the first page is loading — avoids a jarring layout shift once real
@@ -17,7 +18,7 @@ class CharactersSkeletonGrid extends StatelessWidget {
     return Shimmer.fromColors(
       baseColor: theme.colorScheme.surface,
       highlightColor: theme.brightness == Brightness.light
-          ? const Color(0xFFFFFFFF)
+          ? AppColors.lightSurfaceElevated
           : theme.colorScheme.surfaceContainerHighest,
       child: GridView.builder(
         padding: EdgeInsets.all(16.w),

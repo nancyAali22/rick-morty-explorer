@@ -17,6 +17,8 @@ dependencies:
   # Networking
   dio: ^5.7.0
   connectivity_plus: ^6.0.5
+    # Local Persistence (theme mode)
+  shared_preferences: ^2.3.3
 
   # Dependency Injection
   get_it: ^7.7.0

@@ -31,8 +31,22 @@ class ExcelBuilderService {
     // Excel.createExcel() ships with one default sheet named 'Sheet1'.
     // Renaming it (instead of creating a new sheet and deleting the
     // default one) keeps the workbook to a single, correctly named tab.
-    final Sheet sheet = workbook['Sheet1'];
+    //
+    // BUG FIX: the Sheet reference used to be captured BEFORE this
+    // rename call, then written to afterward. The `excel` package does
+    // not guarantee that a Sheet reference grabbed under the old name
+    // stays the object serialized under the new name once renamed —
+    // its own docs warn about exactly this kind of reference staleness
+    // for the similar unLink() call. The result was a real, validly
+    // encoded .xlsx with the "Characters" tab present but empty: the
+    // header/data writes landed on a reference that wasn't necessarily
+    // the one workbook.encode() later serialized.
+    //
+    // Fix: rename first, then fetch the sheet BY THE NEW NAME, so
+    // `sheet` is guaranteed to be the exact object registered under
+    // `_sheetName` at write time — no window for the two to diverge.
     workbook.rename('Sheet1', _sheetName);
+    final Sheet sheet = workbook[_sheetName];
 
     _writeHeaderRow(sheet);
     _writeDataRows(sheet, characters);

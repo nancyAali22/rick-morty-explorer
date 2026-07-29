@@ -17,7 +17,7 @@ class AppTheme {
     textPrimary: AppColors.lightTextPrimary,
     textSecondary: AppColors.lightTextSecondary,
     primary: AppColors.primaryBrown,
-    onPrimary: Colors.white,
+    onPrimary: AppColors.onBrand,
     accent: AppColors.accentMint,
     onAccent: AppColors.accentMintDeep,
   );
@@ -128,14 +128,14 @@ class AppTheme {
       ),
 
       bottomSheetTheme: BottomSheetThemeData(
-        backgroundColor: surface,
+        backgroundColor: surfaceElevated,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
         ),
       ),
 
       dialogTheme: DialogThemeData(
-        backgroundColor: surface,
+        backgroundColor: surfaceElevated,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
         ),

@@ -30,6 +30,8 @@ class AppColors {
   static const Color accentMintDark = Color(0xFF7FB89B);
   static const Color accentMintDeep = Color(0xFF5F8C72);
 
+  static const Color onBrand = Color(0xFFFFFFFF);
+
   // Status
   static const Color statusAlive = accentMint;
   static const Color statusDead = Color(0xFFC6725A);

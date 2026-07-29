@@ -38,7 +38,7 @@ class _SplashPageState extends State<SplashPage>
 
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 50),
+      duration: const Duration(milliseconds: 30),
     );
 
     _fade = CurvedAnimation(

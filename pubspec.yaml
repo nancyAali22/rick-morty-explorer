@@ -1,0 +1,73 @@
+name: rick_morty_explorer
+description: "A production-ready Rick and Morty character explorer built with Clean Architecture, Cubit and Excel export."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State Management
+  flutter_bloc: ^8.1.6
+  equatable: ^2.0.5
+
+  # Networking
+  dio: ^5.7.0
+  connectivity_plus: ^6.0.5
+
+  # Dependency Injection
+  get_it: ^7.7.0
+
+  # Routing
+  go_router: ^14.6.1
+
+  # Responsive UI
+  flutter_screenutil: ^5.9.3
+
+  # Images
+  cached_network_image: ^3.4.1
+
+  # Loading / Skeletons
+  shimmer: ^3.0.0
+
+  # Excel Export
+  excel: ^4.0.6
+  path_provider: ^2.1.5
+  open_file: ^3.5.10
+  permission_handler: ^11.3.1
+
+  # Functional error handling (Either<Failure, Success>)
+  dartz: ^0.10.1
+
+  # Splash Screen
+  flutter_native_splash: ^2.4.3
+
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  build_runner: ^2.4.13
+  mocktail: ^1.0.4
+  bloc_test: ^9.1.7
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/icons/
+
+flutter_native_splash:
+  color: "#0B0B0F"
+  image: assets/images/splash_logo.png
+  color_dark: "#0B0B0F"
+  image_dark: assets/images/splash_logo.png
+  android_12:
+    image: assets/images/splash_logo.png
+    color: "#0B0B0F"
+    image_dark: assets/images/splash_logo.png
+    color_dark: "#0B0B0F"

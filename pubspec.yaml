@@ -61,13 +61,17 @@ flutter:
     - assets/images/
     - assets/icons/
 
+# Colors now match AppColors.lightBackground / AppColors.darkBackground
+# exactly, instead of the old generic unrelated "#0B0B0F" — the native
+# splash frame should feel like the same app as the one that loads
+# right after it.
 flutter_native_splash:
-  color: "#0B0B0F"
+  color: "#FBF7F1"
   image: assets/images/splash_logo.png
-  color_dark: "#0B0B0F"
+  color_dark: "#1C1712"
   image_dark: assets/images/splash_logo.png
   android_12:
     image: assets/images/splash_logo.png
-    color: "#0B0B0F"
+    color: "#FBF7F1"
     image_dark: assets/images/splash_logo.png
-    color_dark: "#0B0B0F"
+    color_dark: "#1C1712"

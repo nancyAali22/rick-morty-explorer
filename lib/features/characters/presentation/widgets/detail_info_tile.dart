@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/theme/app_colors.dart';
 
 /// A single labeled fact row (icon + label + value), reused for every
 /// attribute shown on the character details screen.
+///
+/// Carries the same gold-family border as [CharacterHeader]
+/// ([AppColors.goldBorderFor]), but at low alpha and width 1 —
+/// deliberately quieter than the hero image's opaque 1.6 border, so the
+/// hero stays the visually heaviest element on the page and this grid of
+/// tiles reads as lighter supporting detail.
 class DetailInfoTile extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -18,12 +25,14 @@ class DetailInfoTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final Color borderColor = AppColors.goldBorderFor(theme.brightness);
 
     return Container(
       padding: EdgeInsets.all(14.w),
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(16.r),
+        border: Border.all(color: borderColor.withValues(alpha: 0.35), width: 1),
       ),
       child: Row(
         children: [

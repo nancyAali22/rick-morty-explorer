@@ -5,10 +5,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 /// chip list of episode numbers. Parses the trailing id from each episode
 /// URL rather than fetching the Episode endpoint — the episode's own
 /// name/air-date isn't required here, so no extra network call is made.
-class EpisodesSection extends StatelessWidget {
+///
+/// Built as a plain custom expand/collapse (not [ExpansionTile]) so the
+/// chevron rotation and content reveal both run on the same deliberate
+/// 250ms curve as the rest of the screen's motion, instead of the
+/// platform-default instant snap.
+class EpisodesSection extends StatefulWidget {
   final List<String> episodeUrls;
 
   const EpisodesSection({super.key, required this.episodeUrls});
+
+  @override
+  State<EpisodesSection> createState() => _EpisodesSectionState();
+}
+
+class _EpisodesSectionState extends State<EpisodesSection> {
+  bool _expanded = false;
 
   String _episodeNumber(String url) {
     final segments = url.split('/');
@@ -25,28 +37,58 @@ class EpisodesSection extends StatelessWidget {
         borderRadius: BorderRadius.circular(16.r),
       ),
       clipBehavior: Clip.antiAlias,
-      child: Theme(
-        data: theme.copyWith(dividerColor: Colors.transparent),
-        child: ExpansionTile(
-          leading: Icon(Icons.movie_filter_rounded, color: theme.colorScheme.primary),
-          title: Text('Episodes', style: theme.textTheme.titleMedium?.copyWith(fontSize: 14.sp)),
-          subtitle: Text(
-            '${episodeUrls.length} appearance${episodeUrls.length == 1 ? '' : 's'}',
-            style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12.sp),
-          ),
-          childrenPadding: EdgeInsets.fromLTRB(14.w, 0, 14.w, 14.h),
-          children: [
-            Wrap(
-              spacing: 8.w,
-              runSpacing: 8.h,
-              children: episodeUrls.map((url) {
-                return Chip(
-                  label: Text('Ep. ${_episodeNumber(url)}', style: TextStyle(fontSize: 11.sp)),
-                );
-              }).toList(),
+      child: Column(
+        children: [
+          InkWell(
+            onTap: () => setState(() => _expanded = !_expanded),
+            child: Padding(
+              padding: EdgeInsets.all(14.w),
+              child: Row(
+                children: [
+                  Icon(Icons.movie_filter_rounded, color: theme.colorScheme.primary),
+                  SizedBox(width: 12.w),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Episodes', style: theme.textTheme.titleMedium?.copyWith(fontSize: 14.sp)),
+                        SizedBox(height: 2.h),
+                        Text(
+                          '${widget.episodeUrls.length} appearance${widget.episodeUrls.length == 1 ? '' : 's'}',
+                          style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12.sp),
+                        ),
+                      ],
+                    ),
+                  ),
+                  AnimatedRotation(
+                    turns: _expanded ? 0.5 : 0,
+                    duration: const Duration(milliseconds: 250),
+                    curve: Curves.easeInOut,
+                    child: const Icon(Icons.expand_more_rounded),
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
+          ),
+          AnimatedSize(
+            duration: const Duration(milliseconds: 250),
+            curve: Curves.easeInOut,
+            child: _expanded
+                ? Padding(
+              padding: EdgeInsets.fromLTRB(14.w, 0, 14.w, 14.h),
+              child: Wrap(
+                spacing: 8.w,
+                runSpacing: 8.h,
+                children: widget.episodeUrls.map((url) {
+                  return Chip(
+                    label: Text('Ep. ${_episodeNumber(url)}', style: TextStyle(fontSize: 11.sp)),
+                  );
+                }).toList(),
+              ),
+            )
+                : const SizedBox.shrink(),
+          ),
+        ],
       ),
     );
   }

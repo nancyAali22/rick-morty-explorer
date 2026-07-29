@@ -40,4 +40,32 @@ class AppColors {
   static const Color error = Color(0xFFC6725A);
   static const Color warning = Color(0xFFD9A55C);
   static const Color info = Color(0xFF7C9CB8);
+
+  // Premium detailing (card/search-bar/chip borders)
+  //
+  // Same warm hue family as [primaryBrown] (not a foreign accent color)
+  // but pulled toward gold/champagne so it reads as intentional detailing
+  // rather than "just another brown". Two shades, one per brightness,
+  // because a single hex can't read well against both a bright beige
+  // card (light) and a near-black one (dark) at the same time: the light
+  // shade is muted since the light background is already bright and warm
+  // and a bolder gold would look gaudy; the dark shade is lifted brighter
+  // and slightly more saturated so it doesn't disappear against the
+  // near-black surface.
+  static const Color cardBorderGold = Color(0xFFCBA35C);
+  static const Color cardBorderGoldDark = Color(0xFFE3BB72);
+
+  /// The gold border color to use for the active [brightness] — the
+  /// single place that decides light-vs-dark gold, so card/search-bar/
+  /// chip widgets never duplicate that branch themselves.
+  static Color goldBorderFor(Brightness brightness) =>
+      brightness == Brightness.dark ? cardBorderGoldDark : cardBorderGold;
+
+  /// Search bar fill — [lightSurface]/[darkSurface] (the beige/warm-brown
+  /// surface tone already used elsewhere), tinted with alpha rather than
+  /// solid, instead of the old solid-white fill that clashed with the
+  /// rest of the beige palette.
+  static Color searchBarFillFor(Brightness brightness) => brightness == Brightness.dark
+      ? darkSurface.withValues(alpha: 0.7)
+      : lightSurface.withValues(alpha: 0.7);
 }

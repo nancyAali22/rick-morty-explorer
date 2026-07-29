@@ -19,7 +19,7 @@ dependencies:
   connectivity_plus: ^6.0.5
     # Local Persistence (theme mode)
   shared_preferences: ^2.3.3
-
+  flutter_animate: ^4.5.2
   # Dependency Injection
   get_it: ^7.7.0
 
@@ -69,11 +69,7 @@ flutter:
 # right after it.
 flutter_native_splash:
   color: "#FBF7F1"
-  image: assets/images/splash_logo.png
   color_dark: "#1C1712"
-  image_dark: assets/images/splash_logo.png
   android_12:
-    image: assets/images/splash_logo.png
     color: "#FBF7F1"
-    image_dark: assets/images/splash_logo.png
     color_dark: "#1C1712"

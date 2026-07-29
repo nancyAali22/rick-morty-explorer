@@ -5,14 +5,15 @@ import 'package:go_router/go_router.dart';
 import 'package:open_file/open_file.dart';
 import '../../../../core/di/injection_container.dart';
 import '../../../../core/router/route_names.dart';
-import '../../../../core/theme/widgets/theme_toggle_button.dart';
 import '../../../export/presentation/cubit/export_cubit.dart';
 import '../../../export/presentation/cubit/export_state.dart';
+import '../../../export/widgets/export_fab_button.dart';
 import '../cubit/characters_cubit.dart';
 import '../cubit/characters_state.dart';
 import '../widgets/character_card.dart';
 import '../widgets/character_filter_sheet.dart';
 import '../widgets/character_search_bar.dart';
+import '../widgets/characters_app_bar.dart';
 import '../widgets/characters_empty_state.dart';
 import '../widgets/characters_error_state.dart';
 import '../widgets/characters_skeleton_grid.dart';
@@ -136,26 +137,8 @@ class _CharactersViewState extends State<_CharactersView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Characters'),
-        actions: const [ThemeToggleButton()],
-      ),
-      floatingActionButton: BlocBuilder<ExportCubit, ExportState>(
-        builder: (context, exportState) {
-          final bool isExporting = exportState.status == ExportStatus.exporting;
-          return FloatingActionButton.extended(
-            onPressed: isExporting ? null : _handleExport,
-            icon: isExporting
-                ? SizedBox(
-              width: 18.w,
-              height: 18.w,
-              child: const CircularProgressIndicator(strokeWidth: 2),
-            )
-                : const Icon(Icons.ios_share_rounded),
-            label: Text(isExporting ? 'Exporting…' : 'Export'),
-          );
-        },
-      ),
+      appBar: const CharactersAppBar(),
+      floatingActionButton: ExportFabButton(onPressed: _handleExport),
       body: MultiBlocListener(
         listeners: [
           BlocListener<CharactersCubit, CharactersState>(
@@ -235,6 +218,15 @@ class _CharactersViewState extends State<_CharactersView> {
           key: const ValueKey('grid'),
           onRefresh: () => context.read<CharactersCubit>().refresh(),
           child: GridView.builder(
+            // Keyed by the active search/filter signature (not just
+            // 'grid') so a genuinely new result set gets a fresh
+            // GridView subtree — which replays each CharacterCard's
+            // staggered entrance animation — while scrolling/pagination
+            // under the *same* filters keeps reusing existing card
+            // elements (same key), so nothing replays on every rebuild.
+            key: ValueKey(
+              'grid-${state.searchQuery}|${state.statusFilter}|${state.speciesFilter}|${state.genderFilter}',
+            ),
             controller: _scrollController,
             padding: EdgeInsets.fromLTRB(16.w, 4.h, 16.w, 88.h),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -251,6 +243,7 @@ class _CharactersViewState extends State<_CharactersView> {
               final character = state.characters[index];
               return CharacterCard(
                 character: character,
+                index: index,
                 onTap: () => context.push(RouteNames.characterDetailsPath(character.id), extra: character),
               );
             },

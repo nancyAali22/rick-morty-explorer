@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/theme/app_colors.dart';
 import '../cubit/characters_cubit.dart';
 
 /// A plain text field wired to [CharactersCubit.search]. The debounce
 /// timer itself lives in the Cubit — this widget only forwards keystrokes,
 /// so it stays a pure UI component with zero business logic.
+///
+/// Fill is a soft beige/warm-brown tint ([AppColors.searchBarFillFor])
+/// rather than solid white, and it carries the same thin gold border as
+/// the character cards ([AppColors.goldBorderFor]) so it reads as part
+/// of the same design system instead of a leftover default TextField.
 class CharacterSearchBar extends StatefulWidget {
   const CharacterSearchBar({super.key});
 
@@ -32,6 +38,15 @@ class _CharacterSearchBarState extends State<CharacterSearchBar> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final Color borderColor = AppColors.goldBorderFor(theme.brightness);
+    final Color fillColor = AppColors.searchBarFillFor(theme.brightness);
+
+    final OutlineInputBorder border = OutlineInputBorder(
+      borderRadius: BorderRadius.circular(999),
+      borderSide: BorderSide(color: borderColor.withValues(alpha: 0.8), width: 1),
+    );
+
     return TextField(
       controller: _controller,
       onChanged: (value) => context.read<CharactersCubit>().search(value),
@@ -39,6 +54,13 @@ class _CharacterSearchBarState extends State<CharacterSearchBar> {
       style: TextStyle(fontSize: 14.sp),
       decoration: InputDecoration(
         hintText: 'Search characters…',
+        filled: true,
+        fillColor: fillColor,
+        border: border,
+        enabledBorder: border,
+        focusedBorder: border.copyWith(
+          borderSide: BorderSide(color: borderColor, width: 1.4),
+        ),
         prefixIcon: Icon(Icons.search_rounded, size: 20.sp),
         suffixIcon: ValueListenableBuilder<TextEditingValue>(
           valueListenable: _controller,

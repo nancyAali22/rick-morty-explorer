@@ -19,6 +19,17 @@ subprojects {
     project.evaluationDependsOn(":app")
 }
 
+// ADDED FIX: force every plugin subproject (including flutter_native_splash)
+// to compile against the same compileSdk as the app, so outdated plugin
+// build.gradle files don't fail the build with AAR metadata errors.
+subprojects {
+    afterEvaluate {
+        extensions.findByType<com.android.build.gradle.BaseExtension>()?.let { android ->
+            android.compileSdkVersion(36)
+        }
+    }
+}
+
 tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }

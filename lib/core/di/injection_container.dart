@@ -6,6 +6,7 @@ import '../../features/characters/data/datasources/characters_remote_datasource.
 import '../../features/characters/data/repositories/characters_repository_impl.dart';
 import '../../features/characters/domain/repositories/characters_repository.dart';
 import '../../features/characters/domain/usecases/get_characters_usecase.dart';
+import '../../features/characters/presentation/cubit/characters_cubit.dart';
 
 final GetIt sl = GetIt.instance;
 
@@ -22,8 +23,7 @@ void _initCore() {
 }
 
 void _initCharactersFeature() {
-  // All three are stateless — a single shared instance is safe and
-  // avoids the overhead of re-creating them per Cubit/use-case call.
+
   sl.registerLazySingleton<CharactersRemoteDataSource>(
         () => CharactersRemoteDataSourceImpl(sl<DioClient>().dio),
   );
@@ -37,5 +37,9 @@ void _initCharactersFeature() {
 
   sl.registerLazySingleton<GetCharactersUseCase>(
         () => GetCharactersUseCase(sl()),
+  );
+
+  sl.registerLazySingleton<CharactersCubit>(
+        () => CharactersCubit(sl()),
   );
 }

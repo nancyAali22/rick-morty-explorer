@@ -17,9 +17,13 @@ dependencies:
   # Networking
   dio: ^5.7.0
   connectivity_plus: ^6.0.5
-    # Local Persistence (theme mode)
+
+  # Local Persistence (theme mode)
   shared_preferences: ^2.3.3
+
+  # Animations (splash + theme toggle)
   flutter_animate: ^4.5.2
+
   # Dependency Injection
   get_it: ^7.7.0
 
@@ -44,9 +48,6 @@ dependencies:
   # Functional error handling (Either<Failure, Success>)
   dartz: ^0.10.1
 
-  # Splash Screen
-  flutter_native_splash: ^2.4.3
-
   cupertino_icons: ^1.0.8
 
 dev_dependencies:
@@ -62,18 +63,3 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
-
-# Colors now match AppColors.lightBackground / AppColors.darkBackground
-# exactly, instead of the old generic unrelated "#0B0B0F" — the native
-# splash frame should feel like the same app as the one that loads
-# right after it.
-flutter_native_splash:
-  color: "#FBF7F1"
-  image: assets/images/splash_logo.png
-  color_dark: "#1C1712"
-  image_dark: assets/images/splash_logo.png
-  android_12:
-    image: assets/images/splash_logo.png
-    color: "#FBF7F1"
-    image_dark: assets/images/splash_logo.png
-    color_dark: "#1C1712"

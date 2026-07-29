@@ -46,8 +46,14 @@ class CharacterDetailsPage extends StatelessWidget {
     final theme = Theme.of(context);
     final bool isDark = theme.brightness == Brightness.dark;
     final List<Color> gradientColors = isDark
-        ? [AppColors.darkBackground, AppColors.darkSurface.withValues(alpha: 0.5)]
-        : [AppColors.lightBackground, AppColors.lightSurface.withValues(alpha: 0.5)];
+        ? [
+            AppColors.darkBackground,
+            AppColors.darkSurface.withValues(alpha: 0.5)
+          ]
+        : [
+            AppColors.lightBackground,
+            AppColors.lightSurface.withValues(alpha: 0.5)
+          ];
 
     return Scaffold(
       appBar: AppBar(),
@@ -87,13 +93,17 @@ class CharacterDetailsPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                ).animate().fadeIn(delay: 150.ms, duration: 300.ms, curve: Curves.easeOut).slideY(
-                  begin: 0.12,
-                  end: 0,
-                  delay: 150.ms,
-                  duration: 300.ms,
-                  curve: Curves.easeOutCubic,
-                ),
+                )
+                    .animate()
+                    .fadeIn(
+                        delay: 150.ms, duration: 300.ms, curve: Curves.easeOut)
+                    .slideY(
+                      begin: 0.12,
+                      end: 0,
+                      delay: 150.ms,
+                      duration: 300.ms,
+                      curve: Curves.easeOutCubic,
+                    ),
                 SizedBox(height: 12.h),
                 IntrinsicHeight(
                   child: Row(
@@ -116,36 +126,45 @@ class CharacterDetailsPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                ).animate().fadeIn(delay: 200.ms, duration: 300.ms, curve: Curves.easeOut).slideY(
-                  begin: 0.12,
-                  end: 0,
-                  delay: 200.ms,
-                  duration: 300.ms,
-                  curve: Curves.easeOutCubic,
-                ),
+                )
+                    .animate()
+                    .fadeIn(
+                        delay: 200.ms, duration: 300.ms, curve: Curves.easeOut)
+                    .slideY(
+                      begin: 0.12,
+                      end: 0,
+                      delay: 200.ms,
+                      duration: 300.ms,
+                      curve: Curves.easeOutCubic,
+                    ),
                 SizedBox(height: 12.h),
                 DetailInfoTile(
                   icon: Icons.location_on_rounded,
                   label: 'Last known location',
                   value: entity.location.name,
-                ).animate().fadeIn(delay: 250.ms, duration: 300.ms, curve: Curves.easeOut).slideY(
-                  begin: 0.12,
-                  end: 0,
-                  delay: 250.ms,
-                  duration: 300.ms,
-                  curve: Curves.easeOutCubic,
-                ),
+                )
+                    .animate()
+                    .fadeIn(
+                        delay: 250.ms, duration: 300.ms, curve: Curves.easeOut)
+                    .slideY(
+                      begin: 0.12,
+                      end: 0,
+                      delay: 250.ms,
+                      duration: 300.ms,
+                      curve: Curves.easeOutCubic,
+                    ),
                 SizedBox(height: 12.h),
                 EpisodesSection(episodeUrls: entity.episode)
                     .animate()
-                    .fadeIn(delay: 300.ms, duration: 300.ms, curve: Curves.easeOut)
+                    .fadeIn(
+                        delay: 300.ms, duration: 300.ms, curve: Curves.easeOut)
                     .slideY(
-                  begin: 0.12,
-                  end: 0,
-                  delay: 300.ms,
-                  duration: 300.ms,
-                  curve: Curves.easeOutCubic,
-                ),
+                      begin: 0.12,
+                      end: 0,
+                      delay: 300.ms,
+                      duration: 300.ms,
+                      curve: Curves.easeOutCubic,
+                    ),
                 SizedBox(height: 24.h),
               ],
             ),

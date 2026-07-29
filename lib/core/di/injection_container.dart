@@ -30,29 +30,29 @@ Future<void> _initCore() async {
   sl.registerLazySingleton<Connectivity>(() => Connectivity());
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 
-  final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  final SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
   sl.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
 }
 
 void _initCharactersFeature() {
-
   sl.registerLazySingleton<CharactersRemoteDataSource>(
-        () => CharactersRemoteDataSourceImpl(sl<DioClient>().dio),
+    () => CharactersRemoteDataSourceImpl(sl<DioClient>().dio),
   );
 
   sl.registerLazySingleton<CharactersRepository>(
-        () => CharactersRepositoryImpl(
+    () => CharactersRepositoryImpl(
       remoteDataSource: sl(),
       networkInfo: sl(),
     ),
   );
 
   sl.registerLazySingleton<GetCharactersUseCase>(
-        () => GetCharactersUseCase(sl()),
+    () => GetCharactersUseCase(sl()),
   );
 
   sl.registerLazySingleton<CharactersCubit>(
-        () => CharactersCubit(sl()),
+    () => CharactersCubit(sl()),
   );
 }
 
@@ -62,7 +62,7 @@ void _initExportFeature() {
   sl.registerLazySingleton<FileSaverService>(() => FileSaverService());
 
   sl.registerLazySingleton<ExportCharactersUseCase>(
-        () => ExportCharactersUseCase(sl(), sl()),
+    () => ExportCharactersUseCase(sl(), sl()),
   );
 
   // registerFactory (not lazySingleton): CharactersPage creates a fresh
@@ -78,9 +78,11 @@ Future<void> _initThemeFeature() async {
   // Loaded here — before runApp — rather than inside ThemeCubit's
   // constructor, so the very first frame already renders the saved
   // mode instead of flashing light-mode-then-restoring dark.
-  final ThemeMode initialThemeMode = await sl<ThemeModeStorage>().loadThemeMode();
+  final ThemeMode initialThemeMode =
+      await sl<ThemeModeStorage>().loadThemeMode();
 
   // lazySingleton, provided once at the app root (see main.dart) — theme
   // is app-global state read by every route, unlike ExportCubit above.
-  sl.registerLazySingleton<ThemeCubit>(() => ThemeCubit(sl(), initialThemeMode));
+  sl.registerLazySingleton<ThemeCubit>(
+      () => ThemeCubit(sl(), initialThemeMode));
 }

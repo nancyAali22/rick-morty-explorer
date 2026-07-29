@@ -49,10 +49,12 @@ class CharacterHeader extends StatelessWidget {
                   CachedNetworkImage(
                     imageUrl: character.image,
                     fit: BoxFit.cover,
-                    placeholder: (context, url) => Container(color: theme.colorScheme.surface),
+                    placeholder: (context, url) =>
+                        Container(color: theme.colorScheme.surface),
                     errorWidget: (context, url, error) => Container(
                       color: theme.colorScheme.surface,
-                      child: Icon(Icons.image_not_supported_rounded, size: 40.sp),
+                      child:
+                          Icon(Icons.image_not_supported_rounded, size: 40.sp),
                     ),
                   ),
                   // Fades the bottom edge of the image into the page
@@ -67,8 +69,10 @@ class CharacterHeader extends StatelessWidget {
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: [
-                            theme.scaffoldBackgroundColor.withValues(alpha: 0.0),
-                            theme.scaffoldBackgroundColor.withValues(alpha: 0.55),
+                            theme.scaffoldBackgroundColor
+                                .withValues(alpha: 0.0),
+                            theme.scaffoldBackgroundColor
+                                .withValues(alpha: 0.55),
                           ],
                         ),
                       ),
@@ -90,14 +94,11 @@ class CharacterHeader extends StatelessWidget {
       ],
     );
 
-    return hero
-        .animate()
-        .fadeIn(duration: 300.ms, curve: Curves.easeOut)
-        .scale(
-      begin: const Offset(0.94, 0.94),
-      end: const Offset(1.0, 1.0),
-      duration: 300.ms,
-      curve: Curves.easeOutCubic,
-    );
+    return hero.animate().fadeIn(duration: 300.ms, curve: Curves.easeOut).scale(
+          begin: const Offset(0.94, 0.94),
+          end: const Offset(1.0, 1.0),
+          duration: 300.ms,
+          curve: Curves.easeOutCubic,
+        );
   }
 }

@@ -9,32 +9,32 @@ class AppTheme {
   const AppTheme._();
 
   static ThemeData get light => _base(
-    brightness: Brightness.light,
-    background: AppColors.lightBackground,
-    surface: AppColors.lightSurface,
-    surfaceElevated: AppColors.lightSurfaceElevated,
-    border: AppColors.lightBorder,
-    textPrimary: AppColors.lightTextPrimary,
-    textSecondary: AppColors.lightTextSecondary,
-    primary: AppColors.primaryBrown,
-    onPrimary: AppColors.onBrand,
-    accent: AppColors.accentMint,
-    onAccent: AppColors.accentMintDeep,
-  );
+        brightness: Brightness.light,
+        background: AppColors.lightBackground,
+        surface: AppColors.lightSurface,
+        surfaceElevated: AppColors.lightSurfaceElevated,
+        border: AppColors.lightBorder,
+        textPrimary: AppColors.lightTextPrimary,
+        textSecondary: AppColors.lightTextSecondary,
+        primary: AppColors.primaryBrown,
+        onPrimary: AppColors.onBrand,
+        accent: AppColors.accentMint,
+        onAccent: AppColors.accentMintDeep,
+      );
 
   static ThemeData get dark => _base(
-    brightness: Brightness.dark,
-    background: AppColors.darkBackground,
-    surface: AppColors.darkSurface,
-    surfaceElevated: AppColors.darkSurfaceElevated,
-    border: AppColors.darkBorder,
-    textPrimary: AppColors.darkTextPrimary,
-    textSecondary: AppColors.darkTextSecondary,
-    primary: AppColors.primaryBrownOnDark,
-    onPrimary: AppColors.darkBackground,
-    accent: AppColors.accentMintDark,
-    onAccent: AppColors.darkBackground,
-  );
+        brightness: Brightness.dark,
+        background: AppColors.darkBackground,
+        surface: AppColors.darkSurface,
+        surfaceElevated: AppColors.darkSurfaceElevated,
+        border: AppColors.darkBorder,
+        textPrimary: AppColors.darkTextPrimary,
+        textSecondary: AppColors.darkTextSecondary,
+        primary: AppColors.primaryBrownOnDark,
+        onPrimary: AppColors.darkBackground,
+        accent: AppColors.accentMintDark,
+        onAccent: AppColors.darkBackground,
+      );
 
   static ThemeData _base({
     required Brightness brightness,
@@ -66,7 +66,6 @@ class AppTheme {
       colorScheme: colorScheme,
       scaffoldBackgroundColor: background,
       fontFamily: 'Roboto',
-
       appBarTheme: AppBarTheme(
         backgroundColor: background,
         foregroundColor: textPrimary,
@@ -79,7 +78,6 @@ class AppTheme {
           fontWeight: FontWeight.w600,
         ),
       ),
-
       cardTheme: CardThemeData(
         color: surface,
         elevation: 0,
@@ -88,7 +86,6 @@ class AppTheme {
         ),
         clipBehavior: Clip.antiAlias,
       ),
-
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: surfaceElevated,
@@ -97,9 +94,9 @@ class AppTheme {
           borderRadius: BorderRadius.circular(999),
           borderSide: BorderSide.none,
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       ),
-
       chipTheme: ChipThemeData(
         backgroundColor: surface,
         selectedColor: accent.withValues(alpha: 0.9),
@@ -111,7 +108,6 @@ class AppTheme {
         ),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
       ),
-
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: accent,
         foregroundColor: onAccent,
@@ -120,27 +116,23 @@ class AppTheme {
           borderRadius: BorderRadius.circular(20),
         ),
       ),
-
       dividerTheme: DividerThemeData(
         color: border,
         thickness: 1,
         space: 1,
       ),
-
       bottomSheetTheme: BottomSheetThemeData(
         backgroundColor: surfaceElevated,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
         ),
       ),
-
       dialogTheme: DialogThemeData(
         backgroundColor: surfaceElevated,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
         ),
       ),
-
       snackBarTheme: SnackBarThemeData(
         backgroundColor: surfaceElevated,
         contentTextStyle: TextStyle(color: textPrimary),
@@ -149,7 +141,6 @@ class AppTheme {
           borderRadius: BorderRadius.circular(16),
         ),
       ),
-
       textTheme: TextTheme(
         titleLarge: TextStyle(color: textPrimary, fontWeight: FontWeight.w700),
         titleMedium: TextStyle(color: textPrimary, fontWeight: FontWeight.w600),
@@ -157,7 +148,6 @@ class AppTheme {
         bodyMedium: TextStyle(color: textSecondary),
         labelLarge: TextStyle(color: textPrimary, fontWeight: FontWeight.w600),
       ),
-
       splashFactory: InkSparkle.splashFactory,
     );
   }

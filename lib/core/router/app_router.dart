@@ -1,9 +1,10 @@
 import 'package:go_router/go_router.dart';
-import 'route_names.dart';
+
 import '../../features/characters/domain/entities/character_entity.dart';
 import '../../features/characters/presentation/pages/character_details_page.dart';
 import '../../features/characters/presentation/pages/characters_page.dart';
 import '../../features/splash/presentation/pages/splash_page.dart';
+import 'route_names.dart';
 
 /// go_router configuration. Both Characters list and Character details
 /// are wired to their real pages now.

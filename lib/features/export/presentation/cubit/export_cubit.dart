@@ -29,7 +29,8 @@ class ExportCubit extends Cubit<ExportState> {
 
     result.fold(
       (failure) => emit(
-        state.copyWith(status: ExportStatus.error, errorMessage: failure.message),
+        state.copyWith(
+            status: ExportStatus.error, errorMessage: failure.message),
       ),
       (path) => emit(
         state.copyWith(status: ExportStatus.success, filePath: path),

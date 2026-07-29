@@ -87,7 +87,8 @@ class _CharactersViewState extends State<_CharactersView> {
       initialGender: cubit.state.genderFilter,
     );
     if (result == null) return;
-    cubit.applyFilters(status: result.status, species: result.species, gender: result.gender);
+    cubit.applyFilters(
+        status: result.status, species: result.species, gender: result.gender);
   }
 
   void _handleExport() {
@@ -96,7 +97,8 @@ class _CharactersViewState extends State<_CharactersView> {
     if (characters.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Nothing to export yet — try clearing your search or filters.'),
+          content: Text(
+              'Nothing to export yet — try clearing your search or filters.'),
         ),
       );
       return;
@@ -124,7 +126,9 @@ class _CharactersViewState extends State<_CharactersView> {
         break;
       case ExportStatus.error:
         messenger.showSnackBar(
-          SnackBar(content: Text(state.errorMessage ?? 'Could not export data to Excel.')),
+          SnackBar(
+              content: Text(
+                  state.errorMessage ?? 'Could not export data to Excel.')),
         );
         exportCubit.reset();
         break;
@@ -143,15 +147,19 @@ class _CharactersViewState extends State<_CharactersView> {
         listeners: [
           BlocListener<CharactersCubit, CharactersState>(
             listenWhen: (previous, current) =>
-            current.isPaginationError && current.errorMessage != previous.errorMessage,
+                current.isPaginationError &&
+                current.errorMessage != previous.errorMessage,
             listener: (context, state) {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.errorMessage ?? 'Could not load more characters.')),
+                SnackBar(
+                    content: Text(state.errorMessage ??
+                        'Could not load more characters.')),
               );
             },
           ),
           BlocListener<ExportCubit, ExportState>(
-            listenWhen: (previous, current) => previous.status != current.status,
+            listenWhen: (previous, current) =>
+                previous.status != current.status,
             listener: _handleExportStatusChange,
           ),
         ],
@@ -164,12 +172,15 @@ class _CharactersViewState extends State<_CharactersView> {
                   const Expanded(child: CharacterSearchBar()),
                   SizedBox(width: 8.w),
                   BlocBuilder<CharactersCubit, CharactersState>(
-                    buildWhen: (p, c) => p.hasActiveFilters != c.hasActiveFilters,
+                    buildWhen: (p, c) =>
+                        p.hasActiveFilters != c.hasActiveFilters,
                     builder: (context, state) {
                       return IconButton.filledTonal(
                         onPressed: _openFilterSheet,
                         icon: Icon(
-                          state.hasActiveFilters ? Icons.filter_alt_rounded : Icons.filter_alt_outlined,
+                          state.hasActiveFilters
+                              ? Icons.filter_alt_rounded
+                              : Icons.filter_alt_outlined,
                         ),
                       );
                     },
@@ -180,7 +191,8 @@ class _CharactersViewState extends State<_CharactersView> {
             Expanded(
               child: LayoutBuilder(
                 builder: (context, constraints) {
-                  final crossAxisCount = _crossAxisCountFor(constraints.maxWidth);
+                  final crossAxisCount =
+                      _crossAxisCountFor(constraints.maxWidth);
                   return BlocBuilder<CharactersCubit, CharactersState>(
                     builder: (context, state) => AnimatedSwitcher(
                       duration: const Duration(milliseconds: 250),
@@ -196,11 +208,13 @@ class _CharactersViewState extends State<_CharactersView> {
     );
   }
 
-  Widget _buildBody(BuildContext context, CharactersState state, int crossAxisCount) {
+  Widget _buildBody(
+      BuildContext context, CharactersState state, int crossAxisCount) {
     switch (state.status) {
       case CharactersStatus.initial:
       case CharactersStatus.firstLoading:
-        return CharactersSkeletonGrid(key: const ValueKey('skeleton'), crossAxisCount: crossAxisCount);
+        return CharactersSkeletonGrid(
+            key: const ValueKey('skeleton'), crossAxisCount: crossAxisCount);
 
       case CharactersStatus.error:
         return CharactersErrorState(
@@ -235,7 +249,10 @@ class _CharactersViewState extends State<_CharactersView> {
               crossAxisSpacing: 12.w,
               childAspectRatio: 0.72,
             ),
-            itemCount: state.characters.length + (state.status == CharactersStatus.loadingMore ? crossAxisCount : 0),
+            itemCount: state.characters.length +
+                (state.status == CharactersStatus.loadingMore
+                    ? crossAxisCount
+                    : 0),
             itemBuilder: (context, index) {
               if (index >= state.characters.length) {
                 return const _SkeletonFooterTile();
@@ -244,7 +261,9 @@ class _CharactersViewState extends State<_CharactersView> {
               return CharacterCard(
                 character: character,
                 index: index,
-                onTap: () => context.push(RouteNames.characterDetailsPath(character.id), extra: character),
+                onTap: () => context.push(
+                    RouteNames.characterDetailsPath(character.id),
+                    extra: character),
               );
             },
           ),

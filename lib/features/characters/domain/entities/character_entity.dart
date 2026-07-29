@@ -41,17 +41,17 @@ class CharacterEntity extends Equatable {
 
   @override
   List<Object?> get props => [
-    id,
-    name,
-    status,
-    species,
-    type,
-    gender,
-    origin,
-    location,
-    image,
-    episode,
-    url,
-    created,
-  ];
+        id,
+        name,
+        status,
+        species,
+        type,
+        gender,
+        origin,
+        location,
+        image,
+        episode,
+        url,
+        created,
+      ];
 }

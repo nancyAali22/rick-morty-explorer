@@ -39,12 +39,12 @@ class CharactersState extends Equatable {
   });
 
   factory CharactersState.initial() => const CharactersState(
-    status: CharactersStatus.initial,
-    characters: [],
-    currentPage: 1,
-    hasReachedMax: false,
-    searchQuery: '',
-  );
+        status: CharactersStatus.initial,
+        characters: [],
+        currentPage: 1,
+        hasReachedMax: false,
+        searchQuery: '',
+      );
 
   bool get hasActiveFilters =>
       statusFilter != null || speciesFilter != null || genderFilter != null;
@@ -83,15 +83,15 @@ class CharactersState extends Equatable {
 
   @override
   List<Object?> get props => [
-    status,
-    characters,
-    currentPage,
-    hasReachedMax,
-    searchQuery,
-    statusFilter,
-    speciesFilter,
-    genderFilter,
-    errorMessage,
-    isPaginationError,
-  ];
+        status,
+        characters,
+        currentPage,
+        hasReachedMax,
+        searchQuery,
+        statusFilter,
+        speciesFilter,
+        genderFilter,
+        errorMessage,
+        isPaginationError,
+      ];
 }

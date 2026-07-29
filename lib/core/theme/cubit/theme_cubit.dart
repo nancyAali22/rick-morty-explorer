@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../theme_mode_storage.dart';
 
 /// Single source of truth for the app's ThemeMode. Only ever holds
@@ -16,7 +17,8 @@ class ThemeCubit extends Cubit<ThemeMode> {
   ThemeCubit(this._storage, ThemeMode initialMode) : super(initialMode);
 
   void toggleTheme() {
-    final ThemeMode next = state == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
+    final ThemeMode next =
+        state == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
     emit(next);
     _storage.saveThemeMode(next);
   }

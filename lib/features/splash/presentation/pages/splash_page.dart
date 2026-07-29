@@ -55,14 +55,14 @@ class _SplashPageState extends State<SplashPage> {
     // the app for "alive / explore" meaning, which fits an explorer app
     // better than the brown/beige pairing would.
     final Color gradientStart =
-    isDark ? AppColors.darkBackground : AppColors.lightBackground;
+        isDark ? AppColors.darkBackground : AppColors.lightBackground;
     final Color gradientEnd = isDark
         ? AppColors.accentMintDark.withValues(alpha: 0.35)
         : AppColors.accentMint.withValues(alpha: 0.35);
     final Color ringColor =
-    isDark ? AppColors.primaryBrownOnDark : AppColors.primaryBrown;
+        isDark ? AppColors.primaryBrownOnDark : AppColors.primaryBrown;
     final Color accentColor =
-    isDark ? AppColors.accentMintDark : AppColors.accentMintDeep;
+        isDark ? AppColors.accentMintDark : AppColors.accentMintDeep;
 
     // Clamped against the shortest side (not `.w` from screenutil) so
     // the mark stays proportionate on tablets/foldables instead of
@@ -91,7 +91,7 @@ class _SplashPageState extends State<SplashPage> {
                     title: AppConstants.appName,
                     tagline: 'Explore the multiverse',
                     titleStyle:
-                    theme.textTheme.titleLarge?.copyWith(fontSize: 20.sp),
+                        theme.textTheme.titleLarge?.copyWith(fontSize: 20.sp),
                     taglineStyle: theme.textTheme.bodyMedium,
                   ),
                 ],

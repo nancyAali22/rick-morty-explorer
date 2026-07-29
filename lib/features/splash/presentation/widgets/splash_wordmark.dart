@@ -29,21 +29,21 @@ class SplashWordmark extends StatelessWidget {
             .animate(delay: 500.ms)
             .fadeIn(duration: 450.ms, curve: Curves.easeOut)
             .slideY(
-          begin: 0.25,
-          end: 0,
-          duration: 450.ms,
-          curve: Curves.easeOutCubic,
-        ),
+              begin: 0.25,
+              end: 0,
+              duration: 450.ms,
+              curve: Curves.easeOutCubic,
+            ),
         SizedBox(height: 8.h),
         Text(tagline, style: taglineStyle, textAlign: TextAlign.center)
             .animate(delay: 700.ms)
             .fadeIn(duration: 450.ms, curve: Curves.easeOut)
             .slideY(
-          begin: 0.25,
-          end: 0,
-          duration: 450.ms,
-          curve: Curves.easeOutCubic,
-        ),
+              begin: 0.25,
+              end: 0,
+              duration: 450.ms,
+              curve: Curves.easeOutCubic,
+            ),
       ],
     );
   }

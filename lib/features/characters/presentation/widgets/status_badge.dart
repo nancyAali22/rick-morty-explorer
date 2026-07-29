@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../core/theme/app_colors.dart';
 
 /// Maps a raw API status string to its brand color. Shared by
@@ -44,7 +45,8 @@ class StatusBadge extends StatelessWidget {
           Container(
             width: 6.w,
             height: 6.w,
-            decoration: const BoxDecoration(color: AppColors.onBrand, shape: BoxShape.circle),
+            decoration: const BoxDecoration(
+                color: AppColors.onBrand, shape: BoxShape.circle),
           ),
           SizedBox(width: 6.w),
           Text(

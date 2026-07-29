@@ -65,7 +65,8 @@ class AppColors {
   /// surface tone already used elsewhere), tinted with alpha rather than
   /// solid, instead of the old solid-white fill that clashed with the
   /// rest of the beige palette.
-  static Color searchBarFillFor(Brightness brightness) => brightness == Brightness.dark
-      ? darkSurface.withValues(alpha: 0.7)
-      : lightSurface.withValues(alpha: 0.7);
+  static Color searchBarFillFor(Brightness brightness) =>
+      brightness == Brightness.dark
+          ? darkSurface.withValues(alpha: 0.7)
+          : lightSurface.withValues(alpha: 0.7);
 }

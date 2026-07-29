@@ -1,5 +1,6 @@
 import '../../domain/entities/characters_result_entity.dart';
 import 'character_model.dart';
+
 class CharactersInfoModel extends CharactersInfoEntity {
   const CharactersInfoModel({
     required super.count,
@@ -18,7 +19,8 @@ class CharactersInfoModel extends CharactersInfoEntity {
   }
 
   factory CharactersInfoModel.empty() {
-    return const CharactersInfoModel(count: 0, pages: 0, next: null, prev: null);
+    return const CharactersInfoModel(
+        count: 0, pages: 0, next: null, prev: null);
   }
 }
 

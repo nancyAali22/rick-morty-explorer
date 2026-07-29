@@ -33,8 +33,8 @@ class AnimatedGradientBackground extends StatefulWidget {
       _AnimatedGradientBackgroundState();
 }
 
-class _AnimatedGradientBackgroundState
-    extends State<AnimatedGradientBackground> with TickerProviderStateMixin {
+class _AnimatedGradientBackgroundState extends State<AnimatedGradientBackground>
+    with TickerProviderStateMixin {
   static const Duration _settleDuration = Duration(milliseconds: 1000);
   static const Duration _driftDuration = Duration(milliseconds: 5000);
 
@@ -58,12 +58,14 @@ class _AnimatedGradientBackgroundState
     _settleBegin = AlignmentTween(
       begin: const Alignment(-0.15, -0.5),
       end: _restBegin,
-    ).animate(CurvedAnimation(parent: _settleController, curve: Curves.easeOutCubic));
+    ).animate(
+        CurvedAnimation(parent: _settleController, curve: Curves.easeOutCubic));
 
     _settleEnd = AlignmentTween(
       begin: const Alignment(0.15, 0.5),
       end: _restEnd,
-    ).animate(CurvedAnimation(parent: _settleController, curve: Curves.easeOutCubic));
+    ).animate(
+        CurvedAnimation(parent: _settleController, curve: Curves.easeOutCubic));
 
     _settleController.forward().whenComplete(() {
       if (mounted) _driftController.repeat(reverse: true);

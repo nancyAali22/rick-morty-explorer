@@ -98,7 +98,8 @@ class ExcelBuilderService {
 
       for (int col = 0; col < values.length; col++) {
         sheet
-            .cell(CellIndex.indexByColumnRow(columnIndex: col, rowIndex: rowIndex))
+            .cell(CellIndex.indexByColumnRow(
+                columnIndex: col, rowIndex: rowIndex))
             .value = values[col];
       }
     }

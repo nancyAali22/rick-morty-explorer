@@ -27,7 +27,8 @@ class _CharacterSearchBarState extends State<CharacterSearchBar> {
     super.initState();
     // Seed with whatever query is already in the Cubit, so the field
     // reflects the preserved search when navigating back to this screen.
-    _controller = TextEditingController(text: context.read<CharactersCubit>().state.searchQuery);
+    _controller = TextEditingController(
+        text: context.read<CharactersCubit>().state.searchQuery);
   }
 
   @override
@@ -44,7 +45,8 @@ class _CharacterSearchBarState extends State<CharacterSearchBar> {
 
     final OutlineInputBorder border = OutlineInputBorder(
       borderRadius: BorderRadius.circular(999),
-      borderSide: BorderSide(color: borderColor.withValues(alpha: 0.8), width: 1),
+      borderSide:
+          BorderSide(color: borderColor.withValues(alpha: 0.8), width: 1),
     );
 
     return TextField(

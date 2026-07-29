@@ -7,7 +7,8 @@ class CharactersErrorState extends StatelessWidget {
   final String message;
   final VoidCallback onRetry;
 
-  const CharactersErrorState({super.key, required this.message, required this.onRetry});
+  const CharactersErrorState(
+      {super.key, required this.message, required this.onRetry});
 
   @override
   Widget build(BuildContext context) {

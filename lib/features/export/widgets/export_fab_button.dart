@@ -5,7 +5,6 @@ import '../../../../core/theme/app_colors.dart';
 import '../presentation/cubit/export_cubit.dart';
 import '../presentation/cubit/export_state.dart';
 
-
 /// The Characters screen's export action — a dedicated widget (not
 /// inline in `CharactersPage`) so its color pairing/shape/animation can
 /// be reasoned about and adjusted in one place.
@@ -62,21 +61,23 @@ class _ExportFabButtonState extends State<ExportFabButton> {
               highlightElevation: 5,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(18.r),
-                side: BorderSide(color: goldTrim.withValues(alpha: 0.6), width: 1),
+                side: BorderSide(
+                    color: goldTrim.withValues(alpha: 0.6), width: 1),
               ),
               icon: isExporting
                   ? SizedBox(
-                width: 18.w,
-                height: 18.w,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2,
-                  color: theme.colorScheme.onPrimary,
-                ),
-              )
+                      width: 18.w,
+                      height: 18.w,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: theme.colorScheme.onPrimary,
+                      ),
+                    )
                   : const Icon(Icons.ios_share_rounded),
               label: Text(
                 isExporting ? 'Exporting…' : 'Export',
-                style: const TextStyle(fontWeight: FontWeight.w700, letterSpacing: 0.2),
+                style: const TextStyle(
+                    fontWeight: FontWeight.w700, letterSpacing: 0.2),
               ),
             ),
           ),

@@ -41,7 +41,12 @@ class CharacterFilterSheet extends StatefulWidget {
 
 class _CharacterFilterSheetState extends State<CharacterFilterSheet> {
   static const List<String> _statuses = ['Alive', 'Dead', 'unknown'];
-  static const List<String> _genders = ['Female', 'Male', 'Genderless', 'unknown'];
+  static const List<String> _genders = [
+    'Female',
+    'Male',
+    'Genderless',
+    'unknown'
+  ];
 
   String? _status;
   String? _gender;
@@ -52,7 +57,8 @@ class _CharacterFilterSheetState extends State<CharacterFilterSheet> {
     super.initState();
     _status = widget.initialStatus;
     _gender = widget.initialGender;
-    _speciesController = TextEditingController(text: widget.initialSpecies ?? '');
+    _speciesController =
+        TextEditingController(text: widget.initialSpecies ?? '');
   }
 
   @override
@@ -68,7 +74,8 @@ class _CharacterFilterSheetState extends State<CharacterFilterSheet> {
     final BorderRadius fieldRadius = BorderRadius.circular(14.r);
 
     final Widget content = Padding(
-      padding: EdgeInsets.fromLTRB(20.w, 12.h, 20.w, 20.h + MediaQuery.of(context).viewInsets.bottom),
+      padding: EdgeInsets.fromLTRB(
+          20.w, 12.h, 20.w, 20.h + MediaQuery.of(context).viewInsets.bottom),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,7 +91,8 @@ class _CharacterFilterSheetState extends State<CharacterFilterSheet> {
             ),
           ),
           SizedBox(height: 18.h),
-          Text('Filter characters', style: theme.textTheme.titleLarge?.copyWith(letterSpacing: 0.2)),
+          Text('Filter characters',
+              style: theme.textTheme.titleLarge?.copyWith(letterSpacing: 0.2)),
           SizedBox(height: 22.h),
           _FilterSection(
             title: 'Status',
@@ -97,8 +105,11 @@ class _CharacterFilterSheetState extends State<CharacterFilterSheet> {
                   child: ChoiceChip(
                     label: Text(s),
                     selected: selected,
-                    side: BorderSide(color: goldBorder.withValues(alpha: selected ? 0.9 : 0.5)),
-                    onSelected: (_) => setState(() => _status = selected ? null : s),
+                    side: BorderSide(
+                        color:
+                            goldBorder.withValues(alpha: selected ? 0.9 : 0.5)),
+                    onSelected: (_) =>
+                        setState(() => _status = selected ? null : s),
                   ),
                 );
               }).toList(),
@@ -116,8 +127,11 @@ class _CharacterFilterSheetState extends State<CharacterFilterSheet> {
                   child: ChoiceChip(
                     label: Text(g),
                     selected: selected,
-                    side: BorderSide(color: goldBorder.withValues(alpha: selected ? 0.9 : 0.5)),
-                    onSelected: (_) => setState(() => _gender = selected ? null : g),
+                    side: BorderSide(
+                        color:
+                            goldBorder.withValues(alpha: selected ? 0.9 : 0.5)),
+                    onSelected: (_) =>
+                        setState(() => _gender = selected ? null : g),
                   ),
                 );
               }).toList(),
@@ -132,11 +146,13 @@ class _CharacterFilterSheetState extends State<CharacterFilterSheet> {
                 hintText: 'e.g. Human, Alien…',
                 border: OutlineInputBorder(
                   borderRadius: fieldRadius,
-                  borderSide: BorderSide(color: goldBorder.withValues(alpha: 0.5)),
+                  borderSide:
+                      BorderSide(color: goldBorder.withValues(alpha: 0.5)),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: fieldRadius,
-                  borderSide: BorderSide(color: goldBorder.withValues(alpha: 0.5)),
+                  borderSide:
+                      BorderSide(color: goldBorder.withValues(alpha: 0.5)),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: fieldRadius,
@@ -152,11 +168,13 @@ class _CharacterFilterSheetState extends State<CharacterFilterSheet> {
                 child: TapPulse(
                   child: OutlinedButton(
                     style: OutlinedButton.styleFrom(
-                      side: BorderSide(color: goldBorder.withValues(alpha: 0.7)),
+                      side:
+                          BorderSide(color: goldBorder.withValues(alpha: 0.7)),
                       padding: EdgeInsets.symmetric(vertical: 14.h),
                       shape: RoundedRectangleBorder(borderRadius: fieldRadius),
                     ),
-                    onPressed: () => Navigator.of(context).pop(const CharacterFilterResult()),
+                    onPressed: () => Navigator.of(context)
+                        .pop(const CharacterFilterResult()),
                     child: const Text('Clear'),
                   ),
                 ),
@@ -171,12 +189,16 @@ class _CharacterFilterSheetState extends State<CharacterFilterSheet> {
                       padding: EdgeInsets.symmetric(vertical: 14.h),
                       shape: RoundedRectangleBorder(
                         borderRadius: fieldRadius,
-                        side: BorderSide(color: goldBorder.withValues(alpha: 0.6)),
+                        side: BorderSide(
+                            color: goldBorder.withValues(alpha: 0.6)),
                       ),
                     ),
-                    onPressed: () => Navigator.of(context).pop(CharacterFilterResult(
+                    onPressed: () =>
+                        Navigator.of(context).pop(CharacterFilterResult(
                       status: _status,
-                      species: _speciesController.text.trim().isEmpty ? null : _speciesController.text.trim(),
+                      species: _speciesController.text.trim().isEmpty
+                          ? null
+                          : _speciesController.text.trim(),
                       gender: _gender,
                     )),
                     child: const Text('Apply'),
@@ -209,7 +231,8 @@ class _FilterSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: theme.textTheme.titleMedium?.copyWith(letterSpacing: 0.2)),
+        Text(title,
+            style: theme.textTheme.titleMedium?.copyWith(letterSpacing: 0.2)),
         SizedBox(height: 10.h),
         child,
       ],
@@ -220,11 +243,11 @@ class _FilterSection extends StatelessWidget {
 /// Opens [CharacterFilterSheet] and returns the chosen result, or null if
 /// dismissed without a choice.
 Future<CharacterFilterResult?> showCharacterFilterSheet(
-    BuildContext context, {
-      String? initialStatus,
-      String? initialSpecies,
-      String? initialGender,
-    }) {
+  BuildContext context, {
+  String? initialStatus,
+  String? initialSpecies,
+  String? initialGender,
+}) {
   return showModalBottomSheet<CharacterFilterResult>(
     context: context,
     isScrollControlled: true,

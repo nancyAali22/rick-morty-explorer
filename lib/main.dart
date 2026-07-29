@@ -30,7 +30,7 @@ class RickMortyApp extends StatelessWidget {
           return BlocBuilder<ThemeCubit, ThemeMode>(
             builder: (context, themeMode) {
               final ThemeData activeTheme =
-              themeMode == ThemeMode.dark ? AppTheme.dark : AppTheme.light;
+                  themeMode == ThemeMode.dark ? AppTheme.dark : AppTheme.light;
 
               return MaterialApp.router(
                 title: AppConstants.appName,

@@ -15,7 +15,8 @@ class CharactersRemoteDataSourceImpl implements CharactersRemoteDataSource {
   const CharactersRemoteDataSourceImpl(this.dio);
 
   @override
-  Future<CharactersResultModel> getCharacters(GetCharactersParams params) async {
+  Future<CharactersResultModel> getCharacters(
+      GetCharactersParams params) async {
     try {
       final Response response = await dio.get(
         ApiConstants.characterEndpoint,
@@ -32,9 +33,9 @@ class CharactersRemoteDataSourceImpl implements CharactersRemoteDataSource {
         },
       );
 
-      return CharactersResultModel.fromJson(response.data as Map<String, dynamic>);
+      return CharactersResultModel.fromJson(
+          response.data as Map<String, dynamic>);
     } on DioException catch (e) {
-
       if (e.response?.statusCode == 404) {
         return CharactersResultModel.empty();
       }
@@ -43,11 +44,13 @@ class CharactersRemoteDataSourceImpl implements CharactersRemoteDataSource {
           e.type == DioExceptionType.receiveTimeout ||
           e.type == DioExceptionType.sendTimeout ||
           e.type == DioExceptionType.connectionError) {
-        throw const NetworkException('Connection timed out. Check your internet.');
+        throw const NetworkException(
+            'Connection timed out. Check your internet.');
       }
 
       throw ServerException(
-        e.response?.statusMessage ?? 'Unexpected server error (${e.response?.statusCode}).',
+        e.response?.statusMessage ??
+            'Unexpected server error (${e.response?.statusCode}).',
       );
     } catch (_) {
       throw const ServerException('Failed to parse character data.');

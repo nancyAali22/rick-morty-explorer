@@ -54,10 +54,13 @@ class CharacterCard extends StatelessWidget {
                     child: CachedNetworkImage(
                       imageUrl: character.image,
                       fit: BoxFit.cover,
-                      placeholder: (context, url) => Container(color: theme.colorScheme.surface),
+                      placeholder: (context, url) =>
+                          Container(color: theme.colorScheme.surface),
                       errorWidget: (context, url, error) => Container(
                         color: theme.colorScheme.surface,
-                        child: Icon(Icons.image_not_supported_rounded, color: theme.colorScheme.onSurface.withValues(alpha: 0.4)),
+                        child: Icon(Icons.image_not_supported_rounded,
+                            color: theme.colorScheme.onSurface
+                                .withValues(alpha: 0.4)),
                       ),
                     ),
                   ),
@@ -78,14 +81,16 @@ class CharacterCard extends StatelessWidget {
                     character.name,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.titleMedium?.copyWith(fontSize: 14.sp),
+                    style:
+                        theme.textTheme.titleMedium?.copyWith(fontSize: 14.sp),
                   ),
                   SizedBox(height: 2.h),
                   Text(
                     character.species,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12.sp),
+                    style:
+                        theme.textTheme.bodyMedium?.copyWith(fontSize: 12.sp),
                   ),
                 ],
               ),
@@ -105,11 +110,11 @@ class CharacterCard extends StatelessWidget {
         .animate()
         .fadeIn(delay: delay, duration: 260.ms, curve: Curves.easeOut)
         .scale(
-      delay: delay,
-      begin: const Offset(0.92, 0.92),
-      end: const Offset(1.0, 1.0),
-      duration: 260.ms,
-      curve: Curves.easeOutCubic,
-    );
+          delay: delay,
+          begin: const Offset(0.92, 0.92),
+          end: const Offset(1.0, 1.0),
+          duration: 260.ms,
+          curve: Curves.easeOutCubic,
+        );
   }
 }

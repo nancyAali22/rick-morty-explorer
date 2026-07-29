@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+
 import 'character_entity.dart';
 
 class CharactersInfoEntity extends Equatable {

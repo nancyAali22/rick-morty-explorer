@@ -5,13 +5,15 @@ import '../../../../core/usecase/usecase.dart';
 import '../entities/characters_result_entity.dart';
 import '../repositories/characters_repository.dart';
 
-class GetCharactersUseCase implements UseCase<CharactersResultEntity, GetCharactersParams> {
+class GetCharactersUseCase
+    implements UseCase<CharactersResultEntity, GetCharactersParams> {
   final CharactersRepository repository;
 
   const GetCharactersUseCase(this.repository);
 
   @override
-  Future<Either<Failure, CharactersResultEntity>> call(GetCharactersParams params) {
+  Future<Either<Failure, CharactersResultEntity>> call(
+      GetCharactersParams params) {
     return repository.getCharacters(
       page: params.page,
       name: params.name,

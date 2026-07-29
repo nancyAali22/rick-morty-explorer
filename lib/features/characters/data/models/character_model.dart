@@ -46,7 +46,8 @@ class CharacterModel extends CharacterEntity {
           .map((e) => e as String)
           .toList(),
       url: json['url'] as String? ?? '',
-      created: DateTime.tryParse(json['created'] as String? ?? '') ?? DateTime(1970),
+      created:
+          DateTime.tryParse(json['created'] as String? ?? '') ?? DateTime(1970),
     );
   }
 }

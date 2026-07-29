@@ -8,7 +8,8 @@ class CharactersCubit extends Cubit<CharactersState> {
   final GetCharactersUseCase _getCharactersUseCase;
   Timer? _debounce;
 
-  CharactersCubit(this._getCharactersUseCase) : super(CharactersState.initial());
+  CharactersCubit(this._getCharactersUseCase)
+      : super(CharactersState.initial());
 
   Future<void> loadFirstPage() async {
     emit(state.copyWith(
@@ -22,12 +23,12 @@ class CharactersCubit extends Cubit<CharactersState> {
     final result = await _getCharactersUseCase(_paramsForPage(1));
 
     result.fold(
-          (failure) => emit(state.copyWith(
+      (failure) => emit(state.copyWith(
         status: CharactersStatus.error,
         errorMessage: failure.message,
         isPaginationError: false,
       )),
-          (data) {
+      (data) {
         if (data.characters.isEmpty) {
           emit(state.copyWith(
             status: CharactersStatus.empty,
@@ -65,14 +66,14 @@ class CharactersCubit extends Cubit<CharactersState> {
     final result = await _getCharactersUseCase(_paramsForPage(nextPage));
 
     result.fold(
-          (failure) => emit(state.copyWith(
+      (failure) => emit(state.copyWith(
         // Keep the existing list visible; only flag a pagination error
         // so the UI can show a lightweight retry affordance.
         status: CharactersStatus.success,
         errorMessage: failure.message,
         isPaginationError: true,
       )),
-          (data) => emit(state.copyWith(
+      (data) => emit(state.copyWith(
         status: CharactersStatus.success,
         characters: [...state.characters, ...data.characters],
         currentPage: nextPage,

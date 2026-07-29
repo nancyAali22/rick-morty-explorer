@@ -32,7 +32,8 @@ class DetailInfoTile extends StatelessWidget {
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: borderColor.withValues(alpha: 0.35), width: 1),
+        border:
+            Border.all(color: borderColor.withValues(alpha: 0.35), width: 1),
       ),
       child: Row(
         children: [
@@ -49,7 +50,9 @@ class DetailInfoTile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(label, style: theme.textTheme.bodyMedium?.copyWith(fontSize: 11.sp)),
+                Text(label,
+                    style:
+                        theme.textTheme.bodyMedium?.copyWith(fontSize: 11.sp)),
                 SizedBox(height: 2.h),
                 Text(
                   value.isEmpty ? 'unknown' : value,

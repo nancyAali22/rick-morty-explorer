@@ -36,8 +36,8 @@ class _SplashLogoMarkState extends State<SplashLogoMark>
   void initState() {
     super.initState();
     _orbitController =
-    AnimationController(vsync: this, duration: const Duration(seconds: 6))
-      ..repeat();
+        AnimationController(vsync: this, duration: const Duration(seconds: 6))
+          ..repeat();
     _shimmerController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 2600),
@@ -91,7 +91,8 @@ class _SplashLogoMarkState extends State<SplashLogoMark>
               final double angle = _orbitController.value * 2 * math.pi;
               final double radius = widget.size * 0.42;
               return Transform.translate(
-                offset: Offset(radius * math.cos(angle), radius * math.sin(angle)),
+                offset:
+                    Offset(radius * math.cos(angle), radius * math.sin(angle)),
                 child: Container(
                   width: widget.size * 0.06,
                   height: widget.size * 0.06,
@@ -119,15 +120,12 @@ class _SplashLogoMarkState extends State<SplashLogoMark>
     // only becomes visible as this settles — so the entrance always
     // reads as a clean, deliberate reveal rather than everything moving
     // at once.
-    return mark
-        .animate()
-        .fadeIn(duration: 500.ms, curve: Curves.easeOut)
-        .scale(
-      begin: const Offset(0.7, 0.7),
-      end: const Offset(1.0, 1.0),
-      duration: 600.ms,
-      curve: Curves.easeOutCubic,
-    );
+    return mark.animate().fadeIn(duration: 500.ms, curve: Curves.easeOut).scale(
+          begin: const Offset(0.7, 0.7),
+          end: const Offset(1.0, 1.0),
+          duration: 600.ms,
+          curve: Curves.easeOutCubic,
+        );
   }
 }
 

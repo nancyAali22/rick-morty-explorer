@@ -29,7 +29,8 @@ class ThemeToggleButton extends StatelessWidget {
             duration: const Duration(milliseconds: 250),
             curve: Curves.easeInOutCubic,
             decoration: BoxDecoration(
-              color: theme.colorScheme.primary.withValues(alpha: isDark ? 0.18 : 0.08),
+              color: theme.colorScheme.primary
+                  .withValues(alpha: isDark ? 0.18 : 0.08),
               shape: BoxShape.circle,
             ),
             child: IconButton(
@@ -40,7 +41,8 @@ class ThemeToggleButton extends StatelessWidget {
                 switchInCurve: Curves.easeOutCubic,
                 switchOutCurve: Curves.easeInCubic,
                 transitionBuilder: (child, animation) => RotationTransition(
-                  turns: Tween<double>(begin: 0.72, end: 1.0).animate(animation),
+                  turns:
+                      Tween<double>(begin: 0.72, end: 1.0).animate(animation),
                   child: FadeTransition(opacity: animation, child: child),
                 ),
                 child: Icon(

@@ -5,6 +5,7 @@ class ApiConstants {
 
   static const String baseUrl = 'https://rickandmortyapi.com/api';
   static const String characterEndpoint = '/character';
+
 // Widened from 1600ms so the staged splash sequence (gradient settle
   // -> logo entrance -> wordmark reveal) has room to finish before nav.
   static const Duration splashDuration = Duration(milliseconds: 2000);

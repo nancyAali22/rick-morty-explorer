@@ -45,17 +45,21 @@ class _EpisodesSectionState extends State<EpisodesSection> {
               padding: EdgeInsets.all(14.w),
               child: Row(
                 children: [
-                  Icon(Icons.movie_filter_rounded, color: theme.colorScheme.primary),
+                  Icon(Icons.movie_filter_rounded,
+                      color: theme.colorScheme.primary),
                   SizedBox(width: 12.w),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Episodes', style: theme.textTheme.titleMedium?.copyWith(fontSize: 14.sp)),
+                        Text('Episodes',
+                            style: theme.textTheme.titleMedium
+                                ?.copyWith(fontSize: 14.sp)),
                         SizedBox(height: 2.h),
                         Text(
                           '${widget.episodeUrls.length} appearance${widget.episodeUrls.length == 1 ? '' : 's'}',
-                          style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12.sp),
+                          style: theme.textTheme.bodyMedium
+                              ?.copyWith(fontSize: 12.sp),
                         ),
                       ],
                     ),
@@ -75,17 +79,18 @@ class _EpisodesSectionState extends State<EpisodesSection> {
             curve: Curves.easeInOut,
             child: _expanded
                 ? Padding(
-              padding: EdgeInsets.fromLTRB(14.w, 0, 14.w, 14.h),
-              child: Wrap(
-                spacing: 8.w,
-                runSpacing: 8.h,
-                children: widget.episodeUrls.map((url) {
-                  return Chip(
-                    label: Text('Ep. ${_episodeNumber(url)}', style: TextStyle(fontSize: 11.sp)),
-                  );
-                }).toList(),
-              ),
-            )
+                    padding: EdgeInsets.fromLTRB(14.w, 0, 14.w, 14.h),
+                    child: Wrap(
+                      spacing: 8.w,
+                      runSpacing: 8.h,
+                      children: widget.episodeUrls.map((url) {
+                        return Chip(
+                          label: Text('Ep. ${_episodeNumber(url)}',
+                              style: TextStyle(fontSize: 11.sp)),
+                        );
+                      }).toList(),
+                    ),
+                  )
                 : const SizedBox.shrink(),
           ),
         ],

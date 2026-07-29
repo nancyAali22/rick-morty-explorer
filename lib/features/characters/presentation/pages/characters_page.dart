@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:open_file/open_file.dart';
 import '../../../../core/di/injection_container.dart';
 import '../../../../core/router/route_names.dart';
+import '../../../export/presentation/cubit/export_cubit.dart';
+import '../../../export/presentation/cubit/export_state.dart';
 import '../cubit/characters_cubit.dart';
 import '../cubit/characters_state.dart';
 import '../widgets/character_card.dart';
@@ -14,7 +17,8 @@ import '../widgets/characters_error_state.dart';
 import '../widgets/characters_skeleton_grid.dart';
 
 /// The Characters list screen. Purely orchestration: reads [CharactersCubit]
-/// state and renders the matching widget — no business logic lives here.
+/// and [ExportCubit] state and renders the matching widget — no business
+/// logic lives here.
 class CharactersPage extends StatelessWidget {
   const CharactersPage({super.key});
 
@@ -22,8 +26,12 @@ class CharactersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // sl<CharactersCubit>() always returns the same lazySingleton instance,
     // so re-entering this route never loses the current search/filters.
-    return BlocProvider.value(
-      value: sl<CharactersCubit>(),
+    // sl<ExportCubit>() is a factory: a fresh export flow every visit.
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(value: sl<CharactersCubit>()),
+        BlocProvider(create: (_) => sl<ExportCubit>()),
+      ],
       child: const _CharactersView(),
     );
   }
@@ -80,18 +88,86 @@ class _CharactersViewState extends State<_CharactersView> {
     cubit.applyFilters(status: result.status, species: result.species, gender: result.gender);
   }
 
+  void _handleExport() {
+    final characters = context.read<CharactersCubit>().state.characters;
+
+    if (characters.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Nothing to export yet — try clearing your search or filters.'),
+        ),
+      );
+      return;
+    }
+
+    context.read<ExportCubit>().exportCharacters(characters);
+  }
+
+  void _handleExportStatusChange(BuildContext context, ExportState state) {
+    final messenger = ScaffoldMessenger.of(context);
+    final exportCubit = context.read<ExportCubit>();
+
+    switch (state.status) {
+      case ExportStatus.success:
+        messenger.showSnackBar(
+          SnackBar(
+            content: const Text('Exported to Excel successfully.'),
+            action: SnackBarAction(
+              label: 'OPEN',
+              onPressed: () => OpenFile.open(state.filePath),
+            ),
+          ),
+        );
+        exportCubit.reset();
+        break;
+      case ExportStatus.error:
+        messenger.showSnackBar(
+          SnackBar(content: Text(state.errorMessage ?? 'Could not export data to Excel.')),
+        );
+        exportCubit.reset();
+        break;
+      case ExportStatus.idle:
+      case ExportStatus.exporting:
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Characters')),
-      body: BlocListener<CharactersCubit, CharactersState>(
-        listenWhen: (previous, current) =>
-        current.isPaginationError && current.errorMessage != previous.errorMessage,
-        listener: (context, state) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.errorMessage ?? 'Could not load more characters.')),
+      floatingActionButton: BlocBuilder<ExportCubit, ExportState>(
+        builder: (context, exportState) {
+          final bool isExporting = exportState.status == ExportStatus.exporting;
+          return FloatingActionButton.extended(
+            onPressed: isExporting ? null : _handleExport,
+            icon: isExporting
+                ? SizedBox(
+                    width: 18.w,
+                    height: 18.w,
+                    child: const CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : const Icon(Icons.ios_share_rounded),
+            label: Text(isExporting ? 'Exporting…' : 'Export'),
           );
         },
+      ),
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<CharactersCubit, CharactersState>(
+            listenWhen: (previous, current) =>
+            current.isPaginationError && current.errorMessage != previous.errorMessage,
+            listener: (context, state) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(state.errorMessage ?? 'Could not load more characters.')),
+              );
+            },
+          ),
+          BlocListener<ExportCubit, ExportState>(
+            listenWhen: (previous, current) => previous.status != current.status,
+            listener: _handleExportStatusChange,
+          ),
+        ],
         child: Column(
           children: [
             Padding(
@@ -156,7 +232,7 @@ class _CharactersViewState extends State<_CharactersView> {
           onRefresh: () => context.read<CharactersCubit>().refresh(),
           child: GridView.builder(
             controller: _scrollController,
-            padding: EdgeInsets.fromLTRB(16.w, 4.h, 16.w, 16.h),
+            padding: EdgeInsets.fromLTRB(16.w, 4.h, 16.w, 88.h),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: crossAxisCount,
               mainAxisSpacing: 12.h,
